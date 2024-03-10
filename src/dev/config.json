@@ -1,0 +1,6 @@
+{
+	"startTime": 1685355565123,
+	"bindUdpPort": 12345,
+	"dstUdpHost": "127.0.0.1",
+	"dstUdpPort": 32544
+}

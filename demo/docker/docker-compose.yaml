@@ -1,0 +1,37 @@
+version: "3.3"
+services:
+  recver:
+    build: 
+      context: ./src/recver
+      dockerfile: Dockerfile
+    environment:
+      - PORT=8081
+    hostname: recver
+    container_name: recver 
+
+  midware:
+    build: 
+      context: ./src/midware
+      dockerfile: Dockerfile
+    environment:
+      - SRC_PORT=8080
+      - DEST_PORT=8081
+    hostname: midware
+    container_name: midware
+    depends_on:
+      - recver
+    links:
+      - recver
+
+  sender:
+    build: 
+      context: ./src/sender
+      dockerfile: Dockerfile
+    environment:
+      - PORT=8080
+    hostname: sender
+    container_name: sender 
+    depends_on:
+      - midware
+    links:
+      - midware
